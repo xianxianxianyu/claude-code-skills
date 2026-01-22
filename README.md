@@ -1,6 +1,8 @@
 # Moyu Dual SDD Skills (SpecKit / OpenSpec)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+Read this in Chinese: [`README.zh-CN.md`](README.zh-CN.md)
+
 This repository is a Spec-Driven Development (SDD) scaffold with a dual-mode workflow:
 
 - SpecKit: greenfield work, new modules, linear governance
