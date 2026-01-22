@@ -1,4 +1,10 @@
-﻿<!-- MOYU_AGENT_SHIM -->
+﻿---
+name: sdd-architect
+description: 生成/更新 spec 或 proposal+delta，不写代码。用于规格设计阶段，负责定义 GOAL/NON_GOALS/CONSTRAINTS/ACCEPTANCE。
+tools: Read, Glob, Grep, Write, Edit
+model: sonnet
+---
+
 # Entrypoint Shim: sdd-architect.md
 
 This file is kept under .claude/agents/ so Claude Code can discover the subagent.
@@ -19,4 +25,3 @@ Before doing any work, you MUST read:
 ## Now do this
 1) Open and follow the instructions in: $real
 2) Execute the task using that file as the authoritative agent prompt.
-<!-- MOYU_AGENT_SHIM -->

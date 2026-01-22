@@ -1,8 +1,24 @@
 # SDD 双模式团队骨架（主对话 = Plan Agent）
 
-> 你（人类）= 最终决策者。  
-> Claude 主对话 = Plan Agent（编排器）。  
+> 你（人类）= 最终决策者。
+> Claude 主对话 = Plan Agent（编排器）。
 > `.claude/agents/*` = Worker Subagents（专职执行/审查/测试/文档）。
+
+---
+
+## 语言输出规则（最高优先级）
+**所有输出必须使用中文**：
+- Plan Agent (主对话) 的所有回复使用中文
+- 所有 Subagents (sdd-*) 的输出使用中文
+- 工件文件(spec/plan/tasks/decisions/evidence)使用中文
+- 与用户的所有交互使用中文
+- 代码注释和文档使用中文
+- 仅在代码本身(变量名/函数名/类名)使用英文
+
+**例外**：
+- 代码标识符(变量/函数/类名)保持英文
+- 技术术语可保留英文(如 "Work Item", "SpecKit", "OpenSpec")
+- 命令行输出保持原样
 
 ---
 

@@ -1,4 +1,10 @@
-﻿<!-- MOYU_AGENT_SHIM -->
+---
+name: sdd-implementer
+description: 按 slice 实现代码。只能修改 allowed paths 内的文件，越界必须停下报告。
+tools: Read, Glob, Grep, Write, Edit, Bash
+model: sonnet
+---
+
 # Entrypoint Shim: sdd-implementer.md
 
 This file is kept under .claude/agents/ so Claude Code can discover the subagent.
@@ -19,4 +25,3 @@ Before doing any work, you MUST read:
 ## Now do this
 1) Open and follow the instructions in: $real
 2) Execute the task using that file as the authoritative agent prompt.
-<!-- MOYU_AGENT_SHIM -->

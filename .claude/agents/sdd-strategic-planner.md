@@ -1,4 +1,10 @@
-﻿<!-- MOYU_AGENT_SHIM -->
+---
+name: sdd-strategic-planner
+description: 拆 tasks + Ownership Matrix + slices。将规格拆解为可执行的任务列表，定义文件归属和切片边界。
+tools: Read, Glob, Grep, Write, Edit
+model: sonnet
+---
+
 # Entrypoint Shim: sdd-strategic-planner.md
 
 This file is kept under .claude/agents/ so Claude Code can discover the subagent.
@@ -19,4 +25,3 @@ Before doing any work, you MUST read:
 ## Now do this
 1) Open and follow the instructions in: $real
 2) Execute the task using that file as the authoritative agent prompt.
-<!-- MOYU_AGENT_SHIM -->

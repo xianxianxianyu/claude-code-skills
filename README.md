@@ -51,27 +51,79 @@ The core design goal is simple: keep every SDD artifact under `.claude/moyu/` so
 
 ## Usage Guide
 
-1) Read `CLAUDE.md` first (this defines MODE routing, ARTIFACT_ROOT rules, and gates).
+### Installation
 
-2) Create a Work Item (WI):
+#### Option 1: Global Installation (Recommended for all projects)
+
+Install to your global Claude Code configuration directory:
+
+```bash
+# Clone this repository
+git clone https://github.com/your-username/claude-code-skills.git
+cd claude-code-skills
+
+# Copy to global .claude directory
+# Windows
+xcopy /E /I .claude "%USERPROFILE%\.claude"
+copy CLAUDE.md "%USERPROFILE%\.claude\CLAUDE.md"
+
+# macOS/Linux
+cp -r .claude ~/.claude/
+cp CLAUDE.md ~/.claude/CLAUDE.md
+```
+
+#### Option 2: Project-Specific Installation
+
+Install to a specific project directory:
+
+```bash
+# Navigate to your project
+cd /path/to/your/project
+
+# Clone or copy the .claude directory
+git clone https://github.com/your-username/claude-code-skills.git temp-skills
+cp -r temp-skills/.claude .
+cp temp-skills/CLAUDE.md .claude/CLAUDE.md
+rm -rf temp-skills
+```
+
+#### Verify Installation
+
+After installation, verify that Claude Code can discover the agents:
+
+1. Open Claude Code in your project or globally
+2. Check that the following agents are available:
+   - `sdd-architect`
+   - `sdd-feasibility-analyst`
+   - `sdd-strategic-planner`
+   - `sdd-implementer`
+   - `sdd-code-reviewer`
+   - `sdd-test-runner`
+   - `sdd-doc-sync`
+
+### Using the SDD Workflow
+
+1) **Read `CLAUDE.md` first**: This defines MODE routing, ARTIFACT_ROOT rules, and gates.
+
+2) **Create a Work Item (WI)**:
    - Format: `WI-YYYYMMDD-###-slug`
    - Example: `WI-20260121-001-user-auth`
 
-3) Pick exactly one MODE per WI:
-   - SpecKit: `.claude/moyu/specs/<WI>/` is the truth source for that WI
-   - OpenSpec: `.claude/moyu/openspec/specs/**` is truth, `.claude/moyu/openspec/changes/<WI>/` is the isolated change folder
+3) **Pick exactly one MODE per WI**:
+   - **SpecKit**: `.claude/moyu/specs/<WI>/` is the truth source for that WI
+   - **OpenSpec**: `.claude/moyu/openspec/specs/**` is truth, `.claude/moyu/openspec/changes/<WI>/` is the isolated change folder
 
-4) Use subagents (via `.claude/agents/*.md` shims):
+4) **Use subagents** (via `.claude/agents/*.md` shims):
    - The shim points you to the canonical prompt under `.claude/moyu/agents/*.md`.
    - Follow the role-specific skills under `.claude/moyu/skills/**`.
 
-5) Copy templates and write artifacts:
+5) **Copy templates and write artifacts**:
    - Templates live at `.claude/moyu/templates/**`.
    - Evidence should be written under `ARTIFACT_ROOT/evidence/` (commands + result summaries).
 
-6) Close-out:
-   - SpecKit: ensure `spec.md/plan.md/tasks.md` match reality.
-   - OpenSpec: ensure final behavior is merged into `.claude/moyu/openspec/specs/**` (truth), not left only in changes.
+6) **Close-out**:
+   - **SpecKit**: ensure `spec.md/plan.md/tasks.md` match reality.
+   - **OpenSpec**: ensure final behavior is merged into `.claude/moyu/openspec/specs/**` (truth), not left only in changes.
    - Update `.claude/moyu/docs/**` as needed.
 
 ## Contributing

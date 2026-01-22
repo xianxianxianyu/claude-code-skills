@@ -1,4 +1,10 @@
-﻿<!-- MOYU_AGENT_SHIM -->
+---
+name: sdd-code-reviewer
+description: 只读审查代码，输出 Blocker/Major/Minor 级别问题。不修改代码，只提供审查意见。
+tools: Read, Glob, Grep
+model: sonnet
+---
+
 # Entrypoint Shim: sdd-code-reviewer.md
 
 This file is kept under .claude/agents/ so Claude Code can discover the subagent.
@@ -19,4 +25,3 @@ Before doing any work, you MUST read:
 ## Now do this
 1) Open and follow the instructions in: $real
 2) Execute the task using that file as the authoritative agent prompt.
-<!-- MOYU_AGENT_SHIM -->

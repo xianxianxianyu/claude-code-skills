@@ -51,27 +51,79 @@
 
 ## 使用指南
 
-1) 先读 `CLAUDE.md`：它定义 MODE 路由、ARTIFACT_ROOT 规则、阶段门禁（gates）。
+### 安装步骤
 
-2) 创建一个 Work Item（WI）：
+#### 方式一：全局安装（推荐，适用于所有项目）
+
+安装到全局 Claude Code 配置目录：
+
+```bash
+# 克隆本仓库
+git clone https://github.com/your-username/claude-code-skills.git
+cd claude-code-skills
+
+# 复制到全局 .claude 目录
+# Windows
+xcopy /E /I .claude "%USERPROFILE%\.claude"
+copy CLAUDE.md "%USERPROFILE%\.claude\CLAUDE.md"
+
+# macOS/Linux
+cp -r .claude ~/.claude/
+cp CLAUDE.md ~/.claude/CLAUDE.md
+```
+
+#### 方式二：项目级安装
+
+安装到特定项目目录：
+
+```bash
+# 进入你的项目目录
+cd /path/to/your/project
+
+# 克隆或复制 .claude 目录
+git clone https://github.com/your-username/claude-code-skills.git temp-skills
+cp -r temp-skills/.claude .
+cp temp-skills/CLAUDE.md .claude/CLAUDE.md
+rm -rf temp-skills
+```
+
+#### 验证安装
+
+安装完成后，验证 Claude Code 是否能发现这些 agent：
+
+1. 在项目中或全局打开 Claude Code
+2. 检查以下 agent 是否可用：
+   - `sdd-architect`
+   - `sdd-feasibility-analyst`
+   - `sdd-strategic-planner`
+   - `sdd-implementer`
+   - `sdd-code-reviewer`
+   - `sdd-test-runner`
+   - `sdd-doc-sync`
+
+### 使用 SDD 工作流
+
+1) **先读 `CLAUDE.md`**：它定义 MODE 路由、ARTIFACT_ROOT 规则、阶段门禁（gates）。
+
+2) **创建一个 Work Item（WI）**：
    - 格式：`WI-YYYYMMDD-###-slug`
    - 示例：`WI-20260121-001-user-auth`
 
-3) 每个 WI 必须且只能选一个 MODE：
-   - SpecKit：事实源是 `.claude/moyu/specs/<WI>/`
-   - OpenSpec：事实源是 `.claude/moyu/openspec/specs/**`，隔离变更在 `.claude/moyu/openspec/changes/<WI>/`
+3) **每个 WI 必须且只能选一个 MODE**：
+   - **SpecKit**：事实源是 `.claude/moyu/specs/<WI>/`
+   - **OpenSpec**：事实源是 `.claude/moyu/openspec/specs/**`，隔离变更在 `.claude/moyu/openspec/changes/<WI>/`
 
-4) 调用 subagents（从 `.claude/agents/*.md` 入口层开始）：
+4) **调用 subagents**（从 `.claude/agents/*.md` 入口层开始）：
    - shim 会指向 `.claude/moyu/agents/*.md` 的真实定义
    - 按角色读取并执行 `.claude/moyu/skills/**` 的约束与流程
 
-5) 复制模板并产出工件：
+5) **复制模板并产出工件**：
    - 模板在 `.claude/moyu/templates/**`
    - 证据（命令 + 结果摘要）写入 `ARTIFACT_ROOT/evidence/`
 
-6) 收尾（很关键）：
-   - SpecKit：确保 `spec.md/plan.md/tasks.md` 与实际实现一致
-   - OpenSpec：确保最终行为已同步到 `.claude/moyu/openspec/specs/**`（不要只停留在 changes）
+6) **收尾（很关键）**：
+   - **SpecKit**：确保 `spec.md/plan.md/tasks.md` 与实际实现一致
+   - **OpenSpec**：确保最终行为已同步到 `.claude/moyu/openspec/specs/**`（不要只停留在 changes）
    - 按需更新 `.claude/moyu/docs/**`
 
 ## Contributing

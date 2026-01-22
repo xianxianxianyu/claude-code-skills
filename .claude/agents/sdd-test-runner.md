@@ -1,4 +1,10 @@
-﻿<!-- MOYU_AGENT_SHIM -->
+---
+name: sdd-test-runner
+description: 补 UT + 跑测试 + 生成 evidence。执行测试并记录结果到 evidence/ 目录。
+tools: Read, Glob, Grep, Write, Edit, Bash
+model: sonnet
+---
+
 # Entrypoint Shim: sdd-test-runner.md
 
 This file is kept under .claude/agents/ so Claude Code can discover the subagent.
@@ -19,4 +25,3 @@ Before doing any work, you MUST read:
 ## Now do this
 1) Open and follow the instructions in: $real
 2) Execute the task using that file as the authoritative agent prompt.
-<!-- MOYU_AGENT_SHIM -->
