@@ -1,96 +1,85 @@
-# SDD Dual-Mode Skeleton (SpecKit / OpenSpec)
+# Moyu Dual SDD Skills (SpecKit / OpenSpec)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A Spec-Driven Development (SDD) scaffold for Claude Code/LLM teams. It supports two modes:
+This repository is a Spec-Driven Development (SDD) scaffold with a dual-mode workflow:
 
-- SpecKit: best for greenfield work, new modules, or linear governance
-- OpenSpec: best for incremental changes, multi-module work, and auditability
+- SpecKit: greenfield work, new modules, linear governance
+- OpenSpec: incremental changes, multi-module work, auditability
 
-All SDD artifacts live under `.claude/moyu/` so the repo root stays clean.
+The core design goal is simple: keep every SDD artifact under `.claude/moyu/` so your repo root stays clean and reviews stay deterministic.
 
-## Why this repo
+## Features
 
-- Single source of truth per Work Item (WI)
-- Evidence-first development (commands + results)
-- Deterministic artifact locations for fast reviews
-- Small, reviewable slices to reduce risk
-- Context pack discipline for token efficiency
+- Dual SDD modes with a single-source-of-truth rule per Work Item (WI)
+- Deterministic artifact paths (fast to locate context/spec/tasks/evidence)
+- "Entry shim" subagents under `.claude/agents/` for Claude Code discovery, while keeping canonical agent prompts under `.claude/moyu/agents/`
+- Shared templates under `.claude/moyu/templates/` for consistent artifacts
+- Skills library + agent-to-skills mapping via `.claude/moyu/skills/manifest.yaml`
+- Optional observability via TRACE Envelope (see `.claude/moyu/skills/common/07-TraceEnvelope.md`)
 
-## Quickstart
+## Layout (tree)
 
-1) Read `CLAUDE.md` (workflow source of truth).
+```text
+.
+├── CLAUDE.md                               # Plan Agent manual + mode/path rules (single source of truth for workflow)
+├── README.md                               # This file
+├── LICENSE                                 # MIT license
+└── .claude/                                # Claude Code integration root
+    ├── agents/                             # Entry layer: shims so Claude Code can discover subagents
+    │   ├── sdd-architect.md                # shim -> .claude/moyu/agents/sdd-architect.md
+    │   ├── sdd-feasibility-analyst.md      # shim -> .claude/moyu/agents/sdd-feasibility-analyst.md
+    │   ├── sdd-strategic-planner.md        # shim -> .claude/moyu/agents/sdd-strategic-planner.md
+    │   ├── sdd-implementer.md              # shim -> .claude/moyu/agents/sdd-implementer.md
+    │   ├── sdd-code-reviewer.md            # shim -> .claude/moyu/agents/sdd-code-reviewer.md
+    │   ├── sdd-test-runner.md              # shim -> .claude/moyu/agents/sdd-test-runner.md
+    │   └── sdd-doc-sync.md                 # shim -> .claude/moyu/agents/sdd-doc-sync.md
+    └── moyu/                               # Canonical namespace: all SDD artifacts + prompts live here
+        ├── agents/                         # Real subagent prompts (authoritative source)
+        ├── templates/                      # Canonical templates (common/speckit/openspec)
+        ├── skills/                         # Skills library (includes manifest.yaml mapping agents -> skills)
+        ├── specs/                          # SpecKit artifacts: .claude/moyu/specs/<WI>/...
+        ├── openspec/                       # OpenSpec system
+        │   ├── changes/                    # Change proposals: .claude/moyu/openspec/changes/<WI>/...
+        │   ├── specs/                      # Truth specs: .claude/moyu/openspec/specs/** (must reflect final behavior)
+        │   └── archive/                    # Archived / closed-out changes (optional)
+        ├── docs/                           # Development docs: .claude/moyu/docs/** (kept in sync)
+        ├── .specify/                       # Specify scaffolding (memory + templates)
+        └── trace/                          # Trace logs (optional): runs.jsonl + protocol docs
+```
+
+## Usage Guide
+
+1) Read `CLAUDE.md` first (this defines MODE routing, ARTIFACT_ROOT rules, and gates).
+
 2) Create a Work Item (WI):
    - Format: `WI-YYYYMMDD-###-slug`
    - Example: `WI-20260121-001-user-auth`
-3) Choose a mode:
-   - SpecKit (MODE=speckit)
-   - OpenSpec (MODE=openspec)
-4) Copy templates and run subagents as needed.
-5) Close out by updating the spec truth source and docs.
 
-## Repository layout
+3) Pick exactly one MODE per WI:
+   - SpecKit: `.claude/moyu/specs/<WI>/` is the truth source for that WI
+   - OpenSpec: `.claude/moyu/openspec/specs/**` is truth, `.claude/moyu/openspec/changes/<WI>/` is the isolated change folder
 
-- `CLAUDE.md`: Plan Agent manual + path rules
-- `.claude/agents/`: subagent system prompts
-- `.claude/moyu/templates/`: shared templates
-- `.claude/moyu/specs/`: SpecKit artifacts (one folder per WI)
-- `.claude/moyu/openspec/`: OpenSpec truth specs + change proposals
-- `.claude/moyu/docs/`: development/architecture/requirements docs
-- `.claude/moyu/.specify/`: Specify scaffolding (memory + templates)
+4) Use subagents (via `.claude/agents/*.md` shims):
+   - The shim points you to the canonical prompt under `.claude/moyu/agents/*.md`.
+   - Follow the role-specific skills under `.claude/moyu/skills/**`.
 
-## Mode details
+5) Copy templates and write artifacts:
+   - Templates live at `.claude/moyu/templates/**`.
+   - Evidence should be written under `ARTIFACT_ROOT/evidence/` (commands + result summaries).
 
-### SpecKit (MODE=speckit)
-
-1. Create folders:
-   - `.claude/moyu/specs/<WI>/{slices,evidence}`
-2. Copy templates:
-   - `context.md`   <- `.claude/moyu/templates/common/context.md`
-   - `spec.md`      <- `.claude/moyu/templates/speckit/spec.md`
-   - `plan.md`      <- `.claude/moyu/templates/speckit/plan.md`
-   - `tasks.md`     <- `.claude/moyu/templates/speckit/tasks.md`
-   - `decisions.md` <- `.claude/moyu/templates/speckit/decisions.md`
-3. Suggested orchestration:
-   - sdd-architect -> sdd-feasibility-analyst -> (human gate) -> sdd-strategic-planner
-   - parallel sdd-implementer (by slices)
-   - sdd-code-reviewer -> sdd-test-runner -> sdd-doc-sync
-
-### OpenSpec (MODE=openspec)
-
-1. Create folders:
-   - `.claude/moyu/openspec/changes/<WI>/{slices,evidence,specs}`
-2. Copy templates:
-   - `context.md`   <- `.claude/moyu/templates/common/context.md`
-   - `proposal.md`  <- `.claude/moyu/templates/openspec/proposal.md`
-   - `tasks.md`     <- `.claude/moyu/templates/openspec/tasks.md`
-   - `decisions.md` <- `.claude/moyu/templates/openspec/decisions.md`
-   - delta specs    <- `.claude/moyu/templates/openspec/delta-spec.md` (as needed)
-3. Close-out (important):
-   - After implementation + tests, merge final behavior into `.claude/moyu/openspec/specs/**`
-
-## Subagents
-
-- sdd-architect: spec/proposal + delta specs (no coding)
-- sdd-feasibility-analyst: options/decision/risks/rollback (write decisions)
-- sdd-strategic-planner: tasks + slices + ownership matrix
-- sdd-implementer: implement one slice only (strict touch list)
-- sdd-code-reviewer: read-only review
-- sdd-test-runner: test plan + tests + evidence
-- sdd-doc-sync: docs close-out + spec truth consistency
-
-## Rules (must follow)
-
-- Never generate `specs/`, `openspec/`, `docs/`, or `.specify/` at repo root.
-- All SDD artifacts must live under `.claude/moyu/`.
-- Single source of truth per WI:
-  - SpecKit: `.claude/moyu/specs/<WI>/`
-  - OpenSpec: `.claude/moyu/openspec/specs/**` (truth), `.claude/moyu/openspec/changes/<WI>/` (proposal)
-- Evidence-first: write commands and result summaries into `ARTIFACT_ROOT/evidence/`.
+6) Close-out:
+   - SpecKit: ensure `spec.md/plan.md/tasks.md` match reality.
+   - OpenSpec: ensure final behavior is merged into `.claude/moyu/openspec/specs/**` (truth), not left only in changes.
+   - Update `.claude/moyu/docs/**` as needed.
 
 ## Contributing
 
-Issues and PRs are welcome. Keep changes small, focused, and consistent with the workflow rules in `CLAUDE.md`.
+Issues and PRs are welcome.
+
+- Keep changes small and reviewable.
+- Do not introduce root-level `specs/`, `openspec/`, `docs/`, or `.specify/` directories; all SDD artifacts live under `.claude/moyu/`.
+- If you change any paths, update `CLAUDE.md`, shims in `.claude/agents/`, and any referenced skills/templates/docs to stay consistent.
 
 ## License
 
-Add a `LICENSE` file (MIT/Apache-2.0) if you plan to publish this project.
+MIT. See `LICENSE`.
