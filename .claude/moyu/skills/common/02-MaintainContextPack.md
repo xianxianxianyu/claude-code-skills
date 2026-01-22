@@ -15,7 +15,7 @@ outputs: [updated_context_md]
 
 ## Preconditions
 - ARTIFACT_ROOT 已通过 C01 校验
-- `context.md` 存在（若不存在先从 `.claude/templates/common/context.md` 初始化）
+- `context.md` 存在（若不存在先从 `.claude/moyu/templates/common/context.md` 初始化）
 
 ## Procedure
 1) 读取现有 `ARTIFACT_ROOT/context.md`

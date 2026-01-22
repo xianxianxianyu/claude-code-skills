@@ -9,7 +9,7 @@
 - OpenSpec 变更隔离：`.claude/moyu/openspec/changes/<WI>/`
 - OpenSpec 真相库：`.claude/moyu/openspec/specs/**`
 - Dev docs：`.claude/moyu/docs/**`
-- Templates（不在 moyu 内）：`.claude/templates/**`
+- Templates（在 moyu 内）：`.claude/moyu/templates/**`
 - Specify scaffolding（在 moyu 内）：`.claude/moyu/.specify/**`
 
 ## 如何用（建议）

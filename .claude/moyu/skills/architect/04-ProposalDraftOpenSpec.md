@@ -15,7 +15,7 @@ outputs: [proposal_md, context_updated]
 
 ## Procedure
 1) 从模板初始化（如缺失）：
-   - `.claude/templates/openspec/proposal.md` → `ARTIFACT_ROOT/proposal.md`
+   - `.claude/moyu/templates/openspec/proposal.md` → `ARTIFACT_ROOT/proposal.md`
 2) 填入 Why/What/In-Scope/Out-of-Scope/AC
 3) 指向 delta specs 路径：`ARTIFACT_ROOT/specs/**`
 4) 更新 `context.md`（Phase=Spec）（C02）

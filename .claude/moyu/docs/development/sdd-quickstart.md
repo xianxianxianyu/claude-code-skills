@@ -12,11 +12,11 @@
 1) 创建目录：
    - .claude/moyu/specs/<WI>/{slices,evidence}
 2) 拷贝模板：
-   - context.md ← .claude/templates/common/context.md
-   - spec.md    ← .claude/templates/speckit/spec.md
-   - plan.md    ← .claude/templates/speckit/plan.md
-   - tasks.md   ← .claude/templates/speckit/tasks.md
-   - decisions.md ← .claude/templates/speckit/decisions.md
+   - context.md ← .claude/moyu/templates/common/context.md
+   - spec.md    ← .claude/moyu/templates/speckit/spec.md
+   - plan.md    ← .claude/moyu/templates/speckit/plan.md
+   - tasks.md   ← .claude/moyu/templates/speckit/tasks.md
+   - decisions.md ← .claude/moyu/templates/speckit/decisions.md
 3) 顺序调用 subagents：
    - sdd-architect → sdd-feasibility-analyst →（人工确认）→ sdd-strategic-planner
 4) 并发实现：
@@ -30,11 +30,11 @@
 1) 创建目录：
    - .claude/moyu/openspec/changes/<WI>/{slices,evidence,specs}
 2) 拷贝模板：
-   - context.md  ← .claude/templates/common/context.md
-   - proposal.md ← .claude/templates/openspec/proposal.md
-   - tasks.md    ← .claude/templates/openspec/tasks.md
-   - decisions.md ← .claude/templates/openspec/decisions.md
-   - delta spec  ← .claude/templates/openspec/delta-spec.md （按需创建多个）
+   - context.md  ← .claude/moyu/templates/common/context.md
+   - proposal.md ← .claude/moyu/templates/openspec/proposal.md
+   - tasks.md    ← .claude/moyu/templates/openspec/tasks.md
+   - decisions.md ← .claude/moyu/templates/openspec/decisions.md
+   - delta spec  ← .claude/moyu/templates/openspec/delta-spec.md （按需创建多个）
 3) 对齐后实现：
    - sdd-architect → sdd-feasibility-analyst →（人工确认）→ sdd-strategic-planner → 并发 implementers
 4) 收尾（关键）：

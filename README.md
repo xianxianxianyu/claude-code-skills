@@ -32,7 +32,7 @@ All SDD artifacts live under `.claude/moyu/` so the repo root stays clean.
 
 - `CLAUDE.md`: Plan Agent manual + path rules
 - `.claude/agents/`: subagent system prompts
-- `.claude/templates/`: shared templates
+- `.claude/moyu/templates/`: shared templates
 - `.claude/moyu/specs/`: SpecKit artifacts (one folder per WI)
 - `.claude/moyu/openspec/`: OpenSpec truth specs + change proposals
 - `.claude/moyu/docs/`: development/architecture/requirements docs
@@ -45,11 +45,11 @@ All SDD artifacts live under `.claude/moyu/` so the repo root stays clean.
 1. Create folders:
    - `.claude/moyu/specs/<WI>/{slices,evidence}`
 2. Copy templates:
-   - `context.md`   <- `.claude/templates/common/context.md`
-   - `spec.md`      <- `.claude/templates/speckit/spec.md`
-   - `plan.md`      <- `.claude/templates/speckit/plan.md`
-   - `tasks.md`     <- `.claude/templates/speckit/tasks.md`
-   - `decisions.md` <- `.claude/templates/speckit/decisions.md`
+   - `context.md`   <- `.claude/moyu/templates/common/context.md`
+   - `spec.md`      <- `.claude/moyu/templates/speckit/spec.md`
+   - `plan.md`      <- `.claude/moyu/templates/speckit/plan.md`
+   - `tasks.md`     <- `.claude/moyu/templates/speckit/tasks.md`
+   - `decisions.md` <- `.claude/moyu/templates/speckit/decisions.md`
 3. Suggested orchestration:
    - sdd-architect -> sdd-feasibility-analyst -> (human gate) -> sdd-strategic-planner
    - parallel sdd-implementer (by slices)
@@ -60,11 +60,11 @@ All SDD artifacts live under `.claude/moyu/` so the repo root stays clean.
 1. Create folders:
    - `.claude/moyu/openspec/changes/<WI>/{slices,evidence,specs}`
 2. Copy templates:
-   - `context.md`   <- `.claude/templates/common/context.md`
-   - `proposal.md`  <- `.claude/templates/openspec/proposal.md`
-   - `tasks.md`     <- `.claude/templates/openspec/tasks.md`
-   - `decisions.md` <- `.claude/templates/openspec/decisions.md`
-   - delta specs    <- `.claude/templates/openspec/delta-spec.md` (as needed)
+   - `context.md`   <- `.claude/moyu/templates/common/context.md`
+   - `proposal.md`  <- `.claude/moyu/templates/openspec/proposal.md`
+   - `tasks.md`     <- `.claude/moyu/templates/openspec/tasks.md`
+   - `decisions.md` <- `.claude/moyu/templates/openspec/decisions.md`
+   - delta specs    <- `.claude/moyu/templates/openspec/delta-spec.md` (as needed)
 3. Close-out (important):
    - After implementation + tests, merge final behavior into `.claude/moyu/openspec/specs/**`
 

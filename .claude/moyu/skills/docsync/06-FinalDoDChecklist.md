@@ -17,5 +17,5 @@ outputs: [final_checklist_for_plan_agent]
 - tests pass + evidence
 - review no blockers
 - docs updated
-- (openspec) truth updated in openspec/specs
+- (openspec) truth updated in `.claude/moyu/openspec/specs/**`
 - context Phase=Done

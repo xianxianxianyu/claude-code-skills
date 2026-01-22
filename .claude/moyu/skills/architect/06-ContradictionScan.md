@@ -14,7 +14,7 @@ outputs: [conflict_list]
 提前找出与现有规范/架构/真相库冲突的点，降低返工。
 
 ## Procedure
-1) 对照现有 docs/ 或 openspec/specs（按需最小读取）
+1) 对照现有 `.claude/moyu/docs/` 或 `.claude/moyu/openspec/specs/**`（按需最小读取）
 2) 输出冲突清单（<=7）：
    - 冲突点
    - 为什么冲突

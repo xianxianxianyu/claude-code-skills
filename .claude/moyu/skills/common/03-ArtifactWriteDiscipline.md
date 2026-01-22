@@ -14,9 +14,9 @@ outputs: [consistent_artifacts]
 用模板生成/维护工件，保证结构一致、可审阅、可追踪。
 
 ## Templates (fixed)
-- context/evidence：`.claude/templates/common/{context.md,evidence.md}`
-- speckit：`.claude/templates/speckit/{spec.md,plan.md,tasks.md,decisions.md,slice.md}`
-- openspec：`.claude/templates/openspec/{proposal.md,tasks.md,decisions.md,delta-spec.md,slice.md}`
+- context/evidence：`.claude/moyu/templates/common/{context.md,evidence.md}`
+- speckit：`.claude/moyu/templates/speckit/{spec.md,plan.md,tasks.md,decisions.md,slice.md}`
+- openspec：`.claude/moyu/templates/openspec/{proposal.md,tasks.md,decisions.md,delta-spec.md,slice.md}`
 
 ## Procedure
 1) 新建 WI 工件时：先复制对应模板到 ARTIFACT_ROOT

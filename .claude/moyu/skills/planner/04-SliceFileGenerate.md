@@ -21,5 +21,5 @@ outputs: [slice_md_files]
 - Evidence naming suggestion
 
 ## Templates
-- speckit slice：`.claude/templates/speckit/slice.md`
-- openspec slice：`.claude/templates/openspec/slice.md`
+- speckit slice：`.claude/moyu/templates/speckit/slice.md`
+- openspec slice：`.claude/moyu/templates/openspec/slice.md`

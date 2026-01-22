@@ -14,7 +14,7 @@ outputs: [evidence_file, context_updated]
 把“我验证过了”变成可复盘证据（命令 + 结果摘要），并写入 `evidence/`。
 
 ## Procedure
-1) 若 evidence 文件不存在：从 `.claude/templates/common/evidence.md` 创建
+1) 若 evidence 文件不存在：从 `.claude/moyu/templates/common/evidence.md` 创建
 2) 写入：
    - Commands Run
    - Results Summary

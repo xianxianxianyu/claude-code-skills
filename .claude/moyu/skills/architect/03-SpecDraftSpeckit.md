@@ -15,7 +15,7 @@ outputs: [spec_md, context_updated]
 
 ## Procedure
 1) 从模板初始化（如缺失）：
-   - `.claude/templates/speckit/spec.md` → `ARTIFACT_ROOT/spec.md`
+   - `.claude/moyu/templates/speckit/spec.md` → `ARTIFACT_ROOT/spec.md`
 2) 填入 Goal/Non-goals/Constraints/Scenarios/AC
 3) Open Questions <= 7
 4) 更新 `context.md`（Phase=Spec）（C02）
