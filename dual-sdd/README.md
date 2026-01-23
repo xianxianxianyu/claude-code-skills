@@ -62,7 +62,7 @@ A Spec-Driven Development (SDD) scaffold for Claude Code with dual-mode workflow
 
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/claude-code-skills.git
+git clone https://github.com/xianxianxianyu/claude-code-skills.git
 cd claude-code-skills
 
 # Copy to global .claude directory
@@ -80,7 +80,7 @@ cp CLAUDE.md ~/.claude/CLAUDE.md
 ```bash
 cd /path/to/your/project
 
-git clone https://github.com/your-username/claude-code-skills.git temp-skills
+git clone https://github.com/xianxianxianyu/claude-code-skills.git temp-skills
 cp -r temp-skills/.claude .
 cp temp-skills/CLAUDE.md .claude/CLAUDE.md
 rm -rf temp-skills
@@ -106,9 +106,9 @@ Example: `WI-20260121-001-user-auth`
 
 ### 2. Choose MODE
 
-| MODE | Truth Source | Use Case |
-|------|--------------|----------|
-| SpecKit | `.claude/moyu/specs/<WI>/` | New modules, linear governance |
+| MODE     | Truth Source                     | Use Case                          |
+| -------- | -------------------------------- | --------------------------------- |
+| SpecKit  | `.claude/moyu/specs/<WI>/`       | New modules, linear governance    |
 | OpenSpec | `.claude/moyu/openspec/specs/**` | Incremental changes, multi-module |
 
 ### 3. Execute Pipeline
@@ -150,15 +150,15 @@ skills:
 ---
 ```
 
-| Agent | Skills |
-|-------|--------|
-| sdd-architect | sdd-common, sdd-architect |
+| Agent                   | Skills                      |
+| ----------------------- | --------------------------- |
+| sdd-architect           | sdd-common, sdd-architect   |
 | sdd-feasibility-analyst | sdd-common, sdd-feasibility |
-| sdd-strategic-planner | sdd-common, sdd-planner |
-| sdd-implementer | sdd-common, sdd-implementer |
-| sdd-code-reviewer | sdd-common, sdd-reviewer |
-| sdd-test-runner | sdd-common, sdd-tester |
-| sdd-doc-sync | sdd-common, sdd-docsync |
+| sdd-strategic-planner   | sdd-common, sdd-planner     |
+| sdd-implementer         | sdd-common, sdd-implementer |
+| sdd-code-reviewer       | sdd-common, sdd-reviewer    |
+| sdd-test-runner         | sdd-common, sdd-tester      |
+| sdd-doc-sync            | sdd-common, sdd-docsync     |
 
 ## Contributing
 

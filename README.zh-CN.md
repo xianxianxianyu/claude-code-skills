@@ -8,10 +8,10 @@
 
 ## 包含内容
 
-| 技能包 | 描述 | 适用场景 |
-|--------|------|----------|
-| [**Dual SDD**](dual-sdd/) | 双模式规格驱动开发骨架（SpecKit / OpenSpec） | 需要结构化 规格→计划→实现→审查 工作流的团队 |
-| [**Easy Repo Writer**](easy-repo-writer/) | 自动为任意仓库生成全面文档 | 为现有项目快速生成文档 |
+| 技能包                                    | 描述                                         | 适用场景                                    |
+| ----------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| [**Dual SDD**](dual-sdd/)                 | 双模式规格驱动开发骨架（SpecKit / OpenSpec） | 需要结构化 规格→计划→实现→审查 工作流的团队 |
+| [**Easy Repo Writer**](easy-repo-writer/) | 自动为任意仓库生成全面文档                   | 为现有项目快速生成文档                      |
 
 ---
 
@@ -58,7 +58,7 @@ cp -r dual-sdd/.claude /path/to/your/project/
 ### 方式一：全部安装（全局）
 
 ```bash
-git clone https://github.com/your-username/claude-code-skills.git
+git clone https://github.com/xianxianxianyu/claude-code-skills.git
 cd claude-code-skills
 
 # Windows
@@ -96,13 +96,13 @@ cp -r easy-repo-writer/.claude/skills/easy-repo-writer /path/to/your/project/.cl
 
 ## 快速对比
 
-| 特性 | Dual SDD | Easy Repo Writer |
-|------|----------|------------------|
-| **用途** | 结构化开发工作流 | 文档生成 |
+| 特性           | Dual SDD                                   | Easy Repo Writer         |
+| -------------- | ------------------------------------------ | ------------------------ |
+| **用途**       | 结构化开发工作流                           | 文档生成                 |
 | **Agent 数量** | 7 个（规格、计划、实现、审查、测试、文档） | 3 个（计划、写作、发布） |
-| **工作流** | 多阶段 + 门禁 | 单流水线 |
-| **产出** | 规格、计划、任务、代码、测试、文档 | 仅文档 |
-| **最适合** | 新功能、重构、团队项目 | 需要文档的现有仓库 |
+| **工作流**     | 多阶段 + 门禁                              | 单流水线                 |
+| **产出**       | 规格、计划、任务、代码、测试、文档         | 仅文档                   |
+| **最适合**     | 新功能、重构、团队项目                     | 需要文档的现有仓库       |
 
 ---
 

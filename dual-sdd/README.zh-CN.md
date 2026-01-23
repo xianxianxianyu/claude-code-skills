@@ -62,7 +62,7 @@
 
 ```bash
 # 克隆本仓库
-git clone https://github.com/your-username/claude-code-skills.git
+git clone https://github.com/xianxianxianyu/claude-code-skills.git
 cd claude-code-skills
 
 # 复制到全局 .claude 目录
@@ -80,7 +80,7 @@ cp CLAUDE.md ~/.claude/CLAUDE.md
 ```bash
 cd /path/to/your/project
 
-git clone https://github.com/your-username/claude-code-skills.git temp-skills
+git clone https://github.com/xianxianxianyu/claude-code-skills.git temp-skills
 cp -r temp-skills/.claude .
 cp temp-skills/CLAUDE.md .claude/CLAUDE.md
 rm -rf temp-skills
@@ -106,9 +106,9 @@ rm -rf temp-skills
 
 ### 2. 选择 MODE
 
-| MODE | 事实源 | 适用场景 |
-|------|--------|----------|
-| SpecKit | `.claude/moyu/specs/<WI>/` | 新模块、线性治理 |
+| MODE     | 事实源                           | 适用场景         |
+| -------- | -------------------------------- | ---------------- |
+| SpecKit  | `.claude/moyu/specs/<WI>/`       | 新模块、线性治理 |
 | OpenSpec | `.claude/moyu/openspec/specs/**` | 增量变更、跨模块 |
 
 ### 3. 执行流水线
@@ -150,15 +150,15 @@ skills:
 ---
 ```
 
-| Agent | Skills |
-|-------|--------|
-| sdd-architect | sdd-common, sdd-architect |
+| Agent                   | Skills                      |
+| ----------------------- | --------------------------- |
+| sdd-architect           | sdd-common, sdd-architect   |
 | sdd-feasibility-analyst | sdd-common, sdd-feasibility |
-| sdd-strategic-planner | sdd-common, sdd-planner |
-| sdd-implementer | sdd-common, sdd-implementer |
-| sdd-code-reviewer | sdd-common, sdd-reviewer |
-| sdd-test-runner | sdd-common, sdd-tester |
-| sdd-doc-sync | sdd-common, sdd-docsync |
+| sdd-strategic-planner   | sdd-common, sdd-planner     |
+| sdd-implementer         | sdd-common, sdd-implementer |
+| sdd-code-reviewer       | sdd-common, sdd-reviewer    |
+| sdd-test-runner         | sdd-common, sdd-tester      |
+| sdd-doc-sync            | sdd-common, sdd-docsync     |
 
 ## Contributing
 

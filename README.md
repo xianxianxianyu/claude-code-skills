@@ -8,10 +8,10 @@ A collection of Claude Code skill packs to supercharge your development workflow
 
 ## What's Inside
 
-| Skill Pack | Description | Best For |
-|------------|-------------|----------|
-| [**Dual SDD**](dual-sdd/) | Spec-Driven Development scaffold with dual-mode workflow (SpecKit / OpenSpec) | Teams needing structured spec → plan → implement → review workflows |
-| [**Easy Repo Writer**](easy-repo-writer/) | Auto-generate comprehensive documentation for any repository | Quick documentation generation for existing projects |
+| Skill Pack                                | Description                                                                   | Best For                                                            |
+| ----------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [**Dual SDD**](dual-sdd/)                 | Spec-Driven Development scaffold with dual-mode workflow (SpecKit / OpenSpec) | Teams needing structured spec → plan → implement → review workflows |
+| [**Easy Repo Writer**](easy-repo-writer/) | Auto-generate comprehensive documentation for any repository                  | Quick documentation generation for existing projects                |
 
 ---
 
@@ -58,7 +58,7 @@ Auto-generate documentation using a 3-agent pipeline:
 ### Option 1: Install Everything (Global)
 
 ```bash
-git clone https://github.com/your-username/claude-code-skills.git
+git clone https://github.com/xianxianxianyu/claude-code-skills.git
 cd claude-code-skills
 
 # Windows
@@ -96,13 +96,13 @@ cp -r easy-repo-writer/.claude/skills/easy-repo-writer /path/to/your/project/.cl
 
 ## Quick Comparison
 
-| Feature | Dual SDD | Easy Repo Writer |
-|---------|----------|------------------|
-| **Purpose** | Structured development workflow | Documentation generation |
-| **Agents** | 7 (spec, plan, implement, review, test, doc) | 3 (plan, write, publish) |
-| **Workflow** | Multi-phase with gates | Single pipeline |
-| **Output** | Specs, plans, tasks, code, tests, docs | Documentation only |
-| **Best for** | New features, refactoring, team projects | Existing repos needing docs |
+| Feature      | Dual SDD                                     | Easy Repo Writer            |
+| ------------ | -------------------------------------------- | --------------------------- |
+| **Purpose**  | Structured development workflow              | Documentation generation    |
+| **Agents**   | 7 (spec, plan, implement, review, test, doc) | 3 (plan, write, publish)    |
+| **Workflow** | Multi-phase with gates                       | Single pipeline             |
+| **Output**   | Specs, plans, tasks, code, tests, docs       | Documentation only          |
+| **Best for** | New features, refactoring, team projects     | Existing repos needing docs |
 
 ---
 
