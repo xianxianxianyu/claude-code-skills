@@ -1,139 +1,144 @@
-# Moyu Dual SDD Skills (SpecKit / OpenSpec)
+# Claude Code Skills Collection
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Read this in Chinese: [`README.zh-CN.md`](README.zh-CN.md)
+[中文版](README.zh-CN.md)
 
-This repository is a Spec-Driven Development (SDD) scaffold with a dual-mode workflow:
+A collection of Claude Code skill packs to supercharge your development workflow.
 
-- SpecKit: greenfield work, new modules, linear governance
-- OpenSpec: incremental changes, multi-module work, auditability
+## What's Inside
 
-The core design goal is simple: keep every SDD artifact under `.claude/moyu/` so your repo root stays clean and reviews stay deterministic.
+| Skill Pack | Description | Best For |
+|------------|-------------|----------|
+| [**Dual SDD**](dual-sdd/) | Spec-Driven Development scaffold with dual-mode workflow (SpecKit / OpenSpec) | Teams needing structured spec → plan → implement → review workflows |
+| [**Easy Repo Writer**](easy-repo-writer/) | Auto-generate comprehensive documentation for any repository | Quick documentation generation for existing projects |
 
-## Features
+---
 
-- Dual SDD modes with a single-source-of-truth rule per Work Item (WI)
-- Deterministic artifact paths (fast to locate context/spec/tasks/evidence)
-- "Entry shim" subagents under `.claude/agents/` for Claude Code discovery, while keeping canonical agent prompts under `.claude/moyu/agents/`
-- Shared templates under `.claude/moyu/templates/` for consistent artifacts
-- Skills library + agent-to-skills mapping via `.claude/moyu/skills/manifest.yaml`
-- Optional observability via TRACE Envelope (see `.claude/moyu/skills/common/07-TraceEnvelope.md`)
+## Dual SDD
 
-## Layout (tree)
+A complete Spec-Driven Development framework with:
 
-```text
-.
-├── CLAUDE.md                               # Plan Agent manual + mode/path rules (single source of truth for workflow)
-├── README.md                               # This file
-├── LICENSE                                 # MIT license
-└── .claude/                                # Claude Code integration root
-    ├── agents/                             # Entry layer: shims so Claude Code can discover subagents
-    │   ├── sdd-architect.md                # shim -> .claude/moyu/agents/sdd-architect.md
-    │   ├── sdd-feasibility-analyst.md      # shim -> .claude/moyu/agents/sdd-feasibility-analyst.md
-    │   ├── sdd-strategic-planner.md        # shim -> .claude/moyu/agents/sdd-strategic-planner.md
-    │   ├── sdd-implementer.md              # shim -> .claude/moyu/agents/sdd-implementer.md
-    │   ├── sdd-code-reviewer.md            # shim -> .claude/moyu/agents/sdd-code-reviewer.md
-    │   ├── sdd-test-runner.md              # shim -> .claude/moyu/agents/sdd-test-runner.md
-    │   └── sdd-doc-sync.md                 # shim -> .claude/moyu/agents/sdd-doc-sync.md
-    └── moyu/                               # Canonical namespace: all SDD artifacts + prompts live here
-        ├── agents/                         # Real subagent prompts (authoritative source)
-        ├── templates/                      # Canonical templates (common/speckit/openspec)
-        ├── skills/                         # Skills library (includes manifest.yaml mapping agents -> skills)
-        ├── specs/                          # SpecKit artifacts: .claude/moyu/specs/<WI>/...
-        ├── openspec/                       # OpenSpec system
-        │   ├── changes/                    # Change proposals: .claude/moyu/openspec/changes/<WI>/...
-        │   ├── specs/                      # Truth specs: .claude/moyu/openspec/specs/** (must reflect final behavior)
-        │   └── archive/                    # Archived / closed-out changes (optional)
-        ├── docs/                           # Development docs: .claude/moyu/docs/** (kept in sync)
-        ├── .specify/                       # Specify scaffolding (memory + templates)
-        └── trace/                          # Trace logs (optional): runs.jsonl + protocol docs
+- **SpecKit Mode**: For greenfield projects, new modules, linear governance
+- **OpenSpec Mode**: For incremental changes, multi-module work, auditability
+- **7 Specialized Agents**: Architect, Feasibility Analyst, Strategic Planner, Implementer, Code Reviewer, Test Runner, Doc Sync
+- **9 Skill Sets**: Common utilities + role-specific skills
+- **Gate System**: Enforced checkpoints between phases
+
+**Quick Start:**
+```bash
+# Copy to your project
+cp -r dual-sdd/.claude /path/to/your/project/
 ```
 
-## Usage Guide
+[Read more →](dual-sdd/README.md)
 
-### Installation
+---
 
-#### Option 1: Global Installation (Recommended for all projects)
+## Easy Repo Writer
 
-Install to your global Claude Code configuration directory:
+Auto-generate documentation using a 3-agent pipeline:
+
+- **erw-planner**: Scans repo, creates documentation plan
+- **erw-writer**: Generates multi-perspective docs (journey, system views, positioning)
+- **erw-publisher**: QA checks, creates publish package
+
+**Quick Start:**
+```bash
+# In Claude Code
+/easy-repo-writer
+```
+
+[Read more →](easy-repo-writer/README.md)
+
+---
+
+## Installation
+
+### Option 1: Install Everything (Global)
 
 ```bash
-# Clone this repository
 git clone https://github.com/your-username/claude-code-skills.git
 cd claude-code-skills
 
-# Copy to global .claude directory
 # Windows
-xcopy /E /I .claude "%USERPROFILE%\.claude"
-copy CLAUDE.md "%USERPROFILE%\.claude\CLAUDE.md"
+xcopy /E /I dual-sdd\.claude "%USERPROFILE%\.claude"
+xcopy /E /I easy-repo-writer\.claude "%USERPROFILE%\.claude"
 
 # macOS/Linux
-cp -r .claude ~/.claude/
-cp CLAUDE.md ~/.claude/CLAUDE.md
+cp -r dual-sdd/.claude ~/.claude/
+cp -r easy-repo-writer/.claude ~/.claude/
 ```
 
-#### Option 2: Project-Specific Installation
-
-Install to a specific project directory:
+### Option 2: Install Specific Pack
 
 ```bash
-# Navigate to your project
-cd /path/to/your/project
+# Just Dual SDD
+cp -r dual-sdd/.claude /path/to/your/project/
 
-# Clone or copy the .claude directory
-git clone https://github.com/your-username/claude-code-skills.git temp-skills
-cp -r temp-skills/.claude .
-cp temp-skills/CLAUDE.md .claude/CLAUDE.md
-rm -rf temp-skills
+# Just Easy Repo Writer
+cp -r easy-repo-writer/.claude /path/to/your/project/
 ```
 
-#### Verify Installation
+### Option 3: Cherry-pick Components
 
-After installation, verify that Claude Code can discover the agents:
+Each pack is modular. You can copy individual agents or skills:
 
-1. Open Claude Code in your project or globally
-2. Check that the following agents are available:
-   - `sdd-architect`
-   - `sdd-feasibility-analyst`
-   - `sdd-strategic-planner`
-   - `sdd-implementer`
-   - `sdd-code-reviewer`
-   - `sdd-test-runner`
-   - `sdd-doc-sync`
+```bash
+# Just the architect agent
+cp dual-sdd/.claude/agents/sdd-architect.md /path/to/your/project/.claude/agents/
 
-### Using the SDD Workflow
+# Just the easy-repo-writer skill
+cp -r easy-repo-writer/.claude/skills/easy-repo-writer /path/to/your/project/.claude/skills/
+```
 
-1) **Read `CLAUDE.md` first**: This defines MODE routing, ARTIFACT_ROOT rules, and gates.
+---
 
-2) **Create a Work Item (WI)**:
-   - Format: `WI-YYYYMMDD-###-slug`
-   - Example: `WI-20260121-001-user-auth`
+## Quick Comparison
 
-3) **Pick exactly one MODE per WI**:
-   - **SpecKit**: `.claude/moyu/specs/<WI>/` is the truth source for that WI
-   - **OpenSpec**: `.claude/moyu/openspec/specs/**` is truth, `.claude/moyu/openspec/changes/<WI>/` is the isolated change folder
+| Feature | Dual SDD | Easy Repo Writer |
+|---------|----------|------------------|
+| **Purpose** | Structured development workflow | Documentation generation |
+| **Agents** | 7 (spec, plan, implement, review, test, doc) | 3 (plan, write, publish) |
+| **Workflow** | Multi-phase with gates | Single pipeline |
+| **Output** | Specs, plans, tasks, code, tests, docs | Documentation only |
+| **Best for** | New features, refactoring, team projects | Existing repos needing docs |
 
-4) **Use subagents** (via `.claude/agents/*.md` shims):
-   - The shim points you to the canonical prompt under `.claude/moyu/agents/*.md`.
-   - Follow the role-specific skills under `.claude/moyu/skills/**`.
+---
 
-5) **Copy templates and write artifacts**:
-   - Templates live at `.claude/moyu/templates/**`.
-   - Evidence should be written under `ARTIFACT_ROOT/evidence/` (commands + result summaries).
+## Directory Structure
 
-6) **Close-out**:
-   - **SpecKit**: ensure `spec.md/plan.md/tasks.md` match reality.
-   - **OpenSpec**: ensure final behavior is merged into `.claude/moyu/openspec/specs/**` (truth), not left only in changes.
-   - Update `.claude/moyu/docs/**` as needed.
+```
+claude-code-skills/
+├── README.md                    # This file
+├── README.zh-CN.md              # Chinese version
+├── LICENSE                      # MIT
+├── dual-sdd/                    # Dual SDD skill pack
+│   ├── README.md
+│   ├── README.zh-CN.md
+│   └── .claude/
+│       ├── agents/              # 7 SDD agents
+│       ├── skills/              # 9 skill sets
+│       └── moyu/                # Artifact storage
+└── easy-repo-writer/            # Easy Repo Writer skill pack
+    ├── README.md
+    ├── README.zh-CN.md
+    └── .claude/
+        ├── agents/              # 3 ERW agents
+        ├── skills/              # ERW skills
+        └── moyu/                # Templates & output
+```
+
+---
 
 ## Contributing
 
-Issues and PRs are welcome.
+Issues and PRs are welcome!
 
-- Keep changes small and reviewable.
-- Do not introduce root-level `specs/`, `openspec/`, `docs/`, or `.specify/` directories; all SDD artifacts live under `.claude/moyu/`.
-- If you change any paths, update `CLAUDE.md`, shims in `.claude/agents/`, and any referenced skills/templates/docs to stay consistent.
+- Keep changes small and reviewable
+- Each skill pack should be self-contained
+- Update relevant READMEs when making changes
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).

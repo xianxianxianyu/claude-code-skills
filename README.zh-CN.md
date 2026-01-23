@@ -1,140 +1,144 @@
-# Moyu 双 SDD Skills（SpecKit / OpenSpec）
+# Claude Code 技能包合集
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-英文版：[`README.md`](README.md)
+[English](README.md)
 
-这个仓库的核心是一套「双 SDD」工作流骨架（SpecKit / OpenSpec），用于在 Claude Code/LLM 团队协作中把“规格 → 计划 → 任务 → 实现 → 验证 → 文档”落到可审计、可复用、路径稳定的工件上。
+一套 Claude Code 技能包合集，提升你的开发工作流效率。
 
-设计目标很简单：所有 SDD 工件都落在 `.claude/moyu/` 下，repo 根目录保持干净，审查/回溯更确定。
+## 包含内容
 
-## Features
+| 技能包 | 描述 | 适用场景 |
+|--------|------|----------|
+| [**Dual SDD**](dual-sdd/) | 双模式规格驱动开发骨架（SpecKit / OpenSpec） | 需要结构化 规格→计划→实现→审查 工作流的团队 |
+| [**Easy Repo Writer**](easy-repo-writer/) | 自动为任意仓库生成全面文档 | 为现有项目快速生成文档 |
 
-- 双模式 SDD：按 Work Item（WI）选择 SpecKit 或 OpenSpec
-- 单一事实源（Single Source of Truth）：每个 WI 只能选一种模式作为事实源
-- 工件路径确定：`context/spec/tasks/evidence` 位置固定，便于 review
-- subagent 两层结构：`.claude/agents/` 放 shim（兼容 Claude Code 发现），真实定义在 `.claude/moyu/agents/`
-- 统一模板：`.claude/moyu/templates/` 生成一致的工件结构
-- skills 库与映射：`.claude/moyu/skills/**` + `.claude/moyu/skills/manifest.yaml`
-- 可选可观测性：TRACE Envelope（见 `.claude/moyu/skills/common/07-TraceEnvelope.md`）
+---
 
-## 目录结构（tree）
+## Dual SDD
 
-```text
-.
-├── CLAUDE.md                               # Plan Agent 手册 + MODE/路径/gates 规则
-├── README.md                               # 英文 README
-├── README.zh-CN.md                         # 中文 README
-├── LICENSE                                 # MIT
-└── .claude/                                # Claude Code 集成根目录
-    ├── agents/                             # 入口层：shim，保证 Claude Code 能发现 subagent
-    │   ├── sdd-architect.md                # shim -> .claude/moyu/agents/sdd-architect.md
-    │   ├── sdd-feasibility-analyst.md      # shim -> .claude/moyu/agents/sdd-feasibility-analyst.md
-    │   ├── sdd-strategic-planner.md        # shim -> .claude/moyu/agents/sdd-strategic-planner.md
-    │   ├── sdd-implementer.md              # shim -> .claude/moyu/agents/sdd-implementer.md
-    │   ├── sdd-code-reviewer.md            # shim -> .claude/moyu/agents/sdd-code-reviewer.md
-    │   ├── sdd-test-runner.md              # shim -> .claude/moyu/agents/sdd-test-runner.md
-    │   └── sdd-doc-sync.md                 # shim -> .claude/moyu/agents/sdd-doc-sync.md
-    └── moyu/                               # 真实命名空间：所有 SDD 工件 + prompts 都在这里
-        ├── agents/                         # 真实 subagent prompts（权威来源）
-        ├── templates/                      # 模板（common/speckit/openspec）
-        ├── skills/                         # skills 库（含 manifest.yaml：agent -> skills）
-        ├── specs/                          # SpecKit 工件：.claude/moyu/specs/<WI>/...
-        ├── openspec/                       # OpenSpec 系统
-        │   ├── changes/                    # 变更隔离：.claude/moyu/openspec/changes/<WI>/...
-        │   ├── specs/                      # 真相库：.claude/moyu/openspec/specs/**（必须反映最终行为）
-        │   └── archive/                    # 归档（可选）
-        ├── docs/                           # 开发文档：.claude/moyu/docs/**
-        ├── .specify/                       # Specify scaffolding（memory + templates）
-        └── trace/                          # 可观测性（可选）：runs.jsonl + 协议说明
+完整的规格驱动开发框架：
+
+- **SpecKit 模式**：适用于新项目、新模块、线性治理
+- **OpenSpec 模式**：适用于增量变更、跨模块、可审计性
+- **7 个专职 Agent**：Architect、Feasibility Analyst、Strategic Planner、Implementer、Code Reviewer、Test Runner、Doc Sync
+- **9 套技能集**：通用工具 + 角色专属技能
+- **门禁系统**：阶段间强制检查点
+
+**快速开始：**
+```bash
+# 复制到你的项目
+cp -r dual-sdd/.claude /path/to/your/project/
 ```
 
-## 使用指南
+[详细文档 →](dual-sdd/README.zh-CN.md)
 
-### 安装步骤
+---
 
-#### 方式一：全局安装（推荐，适用于所有项目）
+## Easy Repo Writer
 
-安装到全局 Claude Code 配置目录：
+使用 3-Agent 流水线自动生成文档：
+
+- **erw-planner**：扫描仓库，创建文档计划
+- **erw-writer**：生成多视角文档（旅程、系统视图、产品定位）
+- **erw-publisher**：质量检查，创建发布包
+
+**快速开始：**
+```bash
+# 在 Claude Code 中
+/easy-repo-writer
+```
+
+[详细文档 →](easy-repo-writer/README.zh-CN.md)
+
+---
+
+## 安装方式
+
+### 方式一：全部安装（全局）
 
 ```bash
-# 克隆本仓库
 git clone https://github.com/your-username/claude-code-skills.git
 cd claude-code-skills
 
-# 复制到全局 .claude 目录
 # Windows
-xcopy /E /I .claude "%USERPROFILE%\.claude"
-copy CLAUDE.md "%USERPROFILE%\.claude\CLAUDE.md"
+xcopy /E /I dual-sdd\.claude "%USERPROFILE%\.claude"
+xcopy /E /I easy-repo-writer\.claude "%USERPROFILE%\.claude"
 
 # macOS/Linux
-cp -r .claude ~/.claude/
-cp CLAUDE.md ~/.claude/CLAUDE.md
+cp -r dual-sdd/.claude ~/.claude/
+cp -r easy-repo-writer/.claude ~/.claude/
 ```
 
-#### 方式二：项目级安装
-
-安装到特定项目目录：
+### 方式二：安装特定技能包
 
 ```bash
-# 进入你的项目目录
-cd /path/to/your/project
+# 只安装 Dual SDD
+cp -r dual-sdd/.claude /path/to/your/project/
 
-# 克隆或复制 .claude 目录
-git clone https://github.com/your-username/claude-code-skills.git temp-skills
-cp -r temp-skills/.claude .
-cp temp-skills/CLAUDE.md .claude/CLAUDE.md
-rm -rf temp-skills
+# 只安装 Easy Repo Writer
+cp -r easy-repo-writer/.claude /path/to/your/project/
 ```
 
-#### 验证安装
+### 方式三：按需选取组件
 
-安装完成后，验证 Claude Code 是否能发现这些 agent：
+每个技能包都是模块化的，你可以单独复制 agent 或 skill：
 
-1. 在项目中或全局打开 Claude Code
-2. 检查以下 agent 是否可用：
-   - `sdd-architect`
-   - `sdd-feasibility-analyst`
-   - `sdd-strategic-planner`
-   - `sdd-implementer`
-   - `sdd-code-reviewer`
-   - `sdd-test-runner`
-   - `sdd-doc-sync`
+```bash
+# 只要 architect agent
+cp dual-sdd/.claude/agents/sdd-architect.md /path/to/your/project/.claude/agents/
 
-### 使用 SDD 工作流
+# 只要 easy-repo-writer skill
+cp -r easy-repo-writer/.claude/skills/easy-repo-writer /path/to/your/project/.claude/skills/
+```
 
-1) **先读 `CLAUDE.md`**：它定义 MODE 路由、ARTIFACT_ROOT 规则、阶段门禁（gates）。
+---
 
-2) **创建一个 Work Item（WI）**：
-   - 格式：`WI-YYYYMMDD-###-slug`
-   - 示例：`WI-20260121-001-user-auth`
+## 快速对比
 
-3) **每个 WI 必须且只能选一个 MODE**：
-   - **SpecKit**：事实源是 `.claude/moyu/specs/<WI>/`
-   - **OpenSpec**：事实源是 `.claude/moyu/openspec/specs/**`，隔离变更在 `.claude/moyu/openspec/changes/<WI>/`
+| 特性 | Dual SDD | Easy Repo Writer |
+|------|----------|------------------|
+| **用途** | 结构化开发工作流 | 文档生成 |
+| **Agent 数量** | 7 个（规格、计划、实现、审查、测试、文档） | 3 个（计划、写作、发布） |
+| **工作流** | 多阶段 + 门禁 | 单流水线 |
+| **产出** | 规格、计划、任务、代码、测试、文档 | 仅文档 |
+| **最适合** | 新功能、重构、团队项目 | 需要文档的现有仓库 |
 
-4) **调用 subagents**（从 `.claude/agents/*.md` 入口层开始）：
-   - shim 会指向 `.claude/moyu/agents/*.md` 的真实定义
-   - 按角色读取并执行 `.claude/moyu/skills/**` 的约束与流程
+---
 
-5) **复制模板并产出工件**：
-   - 模板在 `.claude/moyu/templates/**`
-   - 证据（命令 + 结果摘要）写入 `ARTIFACT_ROOT/evidence/`
+## 目录结构
 
-6) **收尾（很关键）**：
-   - **SpecKit**：确保 `spec.md/plan.md/tasks.md` 与实际实现一致
-   - **OpenSpec**：确保最终行为已同步到 `.claude/moyu/openspec/specs/**`（不要只停留在 changes）
-   - 按需更新 `.claude/moyu/docs/**`
+```
+claude-code-skills/
+├── README.md                    # 英文版
+├── README.zh-CN.md              # 本文件
+├── LICENSE                      # MIT
+├── dual-sdd/                    # Dual SDD 技能包
+│   ├── README.md
+│   ├── README.zh-CN.md
+│   └── .claude/
+│       ├── agents/              # 7 个 SDD agent
+│       ├── skills/              # 9 套技能集
+│       └── moyu/                # 工件存储
+└── easy-repo-writer/            # Easy Repo Writer 技能包
+    ├── README.md
+    ├── README.zh-CN.md
+    └── .claude/
+        ├── agents/              # 3 个 ERW agent
+        ├── skills/              # ERW 技能
+        └── moyu/                # 模板与输出
+```
 
-## Contributing
+---
 
-欢迎提 Issue/PR：
+## 贡献
 
-- 尽量小步、可 review。
-- 不要在 repo 根目录生成 `specs/`、`openspec/`、`docs/`、`.specify/`；所有 SDD 工件必须在 `.claude/moyu/` 下。
-- 任何路径变更都需要同步更新：`CLAUDE.md`、`.claude/agents` shim、以及相关 skills/templates/docs。
+欢迎提 Issue 和 PR！
+
+- 尽量小步、可 review
+- 每个技能包应该自包含
+- 修改时更新相关 README
 
 ## License
 
-MIT，见 `LICENSE`。
-
+MIT，见 [LICENSE](LICENSE)。
