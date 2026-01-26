@@ -13,12 +13,14 @@ A Claude Code skill pack that automatically generates comprehensive, readable do
 - **Bilingual Support**: Generate docs in Chinese, English, or both
 - **Safe Publishing**: Default patch mode - generates change packages without modifying repo
 - **Customizable Depth**: Quick overview, standard docs, or deep analysis
+- **Auto-loaded rules** in `.claude/rules/easy-repo-writer/` for consistent policies
 
 ## Directory Structure
 
 ```text
 easy-repo-writer/
 └── .claude/
+    ├── CLAUDE.MD                            # Project-level config (slim)
     ├── agents/                              # Agent definitions
     │   ├── erw-planner.md                   # Scans repo, creates doc plan
     │   ├── erw-writer.md                    # Generates documentation
@@ -31,6 +33,12 @@ easy-repo-writer/
     │           ├── planner/                 # Planning skills
     │           ├── writer/                  # Writing skills
     │           └── publisher/               # Publishing skills
+    ├── rules/                               # Auto-loaded rules
+    │   └── easy-repo-writer/
+    │       ├── docs.md                      # Documentation rules
+    │       ├── testing.md                   # QA rules
+    │       ├── style.md                     # Style rules
+    │       └── security.md                  # Security rules
     └── moyu/
         ├── templates/easy-repo-writer/      # Doc templates
         └── docs/easy-repo-writer/runs/      # Output directory
@@ -54,6 +62,8 @@ xcopy /E /I easy-repo-writer\.claude "%USERPROFILE%\.claude"
 # macOS/Linux
 cp -r easy-repo-writer/.claude ~/.claude/
 ```
+
+**Note**: When installing multiple packs, rules are namespaced under `rules/<pack>/` to avoid conflicts.
 
 ## Usage
 

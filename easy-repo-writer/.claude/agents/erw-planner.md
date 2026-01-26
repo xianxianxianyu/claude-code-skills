@@ -1,6 +1,6 @@
 ---
 name: erw-planner
-description: ERW planning agent. Scans repo and produces repo-profile + doc-map + tasks for the easy-repo-writer pipeline.
+description: 仓库扫描与文档规划。触发：scan repo、doc plan、repo profile。输出：repo-profile.md、doc-map.md、tasks.md。边界：只分析不写文档。
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
 

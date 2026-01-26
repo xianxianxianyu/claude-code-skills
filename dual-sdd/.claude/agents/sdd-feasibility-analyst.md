@@ -1,6 +1,6 @@
 ---
 name: sdd-feasibility-analyst
-description: 方案对比/推荐决策，写 decisions.md。分析多个技术方案的可行性、风险和权衡，给出推荐。
+description: 技术方案对比与决策。触发：feasibility、方案对比、技术选型、风险评估。输出：decisions.md。边界：只分析 HOW，不修改需求。
 tools:
   - Read
   - Glob

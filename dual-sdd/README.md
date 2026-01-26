@@ -12,8 +12,9 @@ A Spec-Driven Development (SDD) scaffold for Claude Code with dual-mode workflow
 
 - Dual SDD modes with single-source-of-truth rule per Work Item (WI)
 - Standard Claude Code structure: agents in `.claude/agents/`, skills in `.claude/skills/`
+- **Auto-loaded rules** in `.claude/rules/dual-sdd/` for consistent policies
 - Deterministic artifact paths under `.claude/moyu/`
-- Shared templates for consistent artifacts
+- Shared templates for consistent artifacts with cross-linking
 - Agent-to-skills mapping via frontmatter `skills:` field
 - Optional observability via TRACE Envelope
 
@@ -21,12 +22,11 @@ A Spec-Driven Development (SDD) scaffold for Claude Code with dual-mode workflow
 
 ```text
 .
-├── CLAUDE.md                               # Global Plan Agent manual (user's ~/.claude/)
 ├── README.md                               # This file
 ├── LICENSE                                 # MIT license
 └── .claude/                                # Claude Code integration root
-    ├── CLAUDE.md                           # Project-level config + skills loading rules
-    ├── agents/                             # Agent definitions (complete, not shims)
+    ├── CLAUDE.md                           # Project-level config (slim)
+    ├── agents/                             # Agent definitions
     │   ├── sdd-architect.md                # Spec/proposal design
     │   ├── sdd-feasibility-analyst.md      # Option comparison & decisions
     │   ├── sdd-strategic-planner.md        # Task decomposition & slicing
@@ -35,23 +35,27 @@ A Spec-Driven Development (SDD) scaffold for Claude Code with dual-mode workflow
     │   ├── sdd-test-runner.md              # Test execution & evidence
     │   └── sdd-doc-sync.md                 # Documentation sync
     ├── skills/                             # Skill definitions
-    │   ├── sdd-common/SKILL.md             # Common skills (paths, context, artifacts)
-    │   ├── sdd-architect/SKILL.md          # Architect-specific skills
-    │   ├── sdd-feasibility/SKILL.md        # Feasibility analysis skills
-    │   ├── sdd-planner/SKILL.md            # Planning & slicing skills
-    │   ├── sdd-implementer/SKILL.md        # Implementation skills
-    │   ├── sdd-reviewer/SKILL.md           # Code review skills
-    │   ├── sdd-tester/SKILL.md             # Testing skills
-    │   ├── sdd-docsync/SKILL.md            # Doc sync skills
-    │   └── sdd-plan/SKILL.md               # Plan Agent orchestration skills
-    └── moyu/                               # Artifact storage (clean separation)
-        ├── specs/                          # SpecKit artifacts: .claude/moyu/specs/<WI>/
+    │   ├── sdd-common/SKILL.md             # Common skills
+    │   └── sdd-*/SKILL.md                  # Role-specific skills
+    ├── rules/                              # Auto-loaded rules
+    │   └── dual-sdd/
+    │       ├── docs.md                     # Documentation rules
+    │       ├── testing.md                  # Testing rules
+    │       ├── style.md                    # Code style rules
+    │       ├── security.md                 # Security rules
+    │       └── docs/                       # Path-scoped rules
+    │           ├── prd.md                  # For spec.md/proposal.md
+    │           └── feasibility.md          # For decisions.md
+    └── moyu/                               # Artifact storage
+        ├── specs/                          # SpecKit artifacts
         ├── openspec/                       # OpenSpec system
-        │   ├── changes/                    # Change proposals: .claude/moyu/openspec/changes/<WI>/
-        │   └── specs/                      # Truth specs (must reflect final behavior)
+        │   ├── changes/                    # Change proposals
+        │   └── specs/                      # Truth specs
         ├── templates/                      # Canonical templates
         ├── docs/                           # Development docs
-        ├── trace/                          # Trace logs: runs.jsonl
+        │   ├── architecture.md             # Pack architecture
+        │   └── doc-types.md                # Document type definitions
+        ├── trace/                          # Trace logs
         └── .specify/                       # Specify scaffolding
 
 ```
@@ -63,17 +67,17 @@ A Spec-Driven Development (SDD) scaffold for Claude Code with dual-mode workflow
 ```bash
 # Clone this repository
 git clone https://github.com/xianxianxianyu/claude-code-skills.git
-cd claude-code-skills
+cd claude-code-skills/dual-sdd
 
 # Copy to global .claude directory
 # Windows
 xcopy /E /I .claude "%USERPROFILE%\.claude"
-copy CLAUDE.md "%USERPROFILE%\.claude\CLAUDE.md"
 
 # macOS/Linux
 cp -r .claude ~/.claude/
-cp CLAUDE.md ~/.claude/CLAUDE.md
 ```
+
+**Note**: When installing multiple packs, rules are namespaced under `rules/<pack>/` to avoid conflicts.
 
 ### Option 2: Project-Specific Installation
 
@@ -81,8 +85,7 @@ cp CLAUDE.md ~/.claude/CLAUDE.md
 cd /path/to/your/project
 
 git clone https://github.com/xianxianxianyu/claude-code-skills.git temp-skills
-cp -r temp-skills/.claude .
-cp temp-skills/CLAUDE.md .claude/CLAUDE.md
+cp -r temp-skills/dual-sdd/.claude .
 rm -rf temp-skills
 ```
 

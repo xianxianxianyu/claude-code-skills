@@ -1,6 +1,6 @@
 ---
 name: sdd-architect
-description: 生成/更新 spec 或 proposal+delta，不写代码。用于规格设计阶段，负责定义 GOAL/NON_GOALS/CONSTRAINTS/ACCEPTANCE。
+description: 需求分析与规格设计。触发：PRD、spec、proposal、需求定义。输出：spec.md 或 proposal.md+delta。边界：只定义 WHAT/WHY，不做技术决策。
 tools:
   - Read
   - Glob

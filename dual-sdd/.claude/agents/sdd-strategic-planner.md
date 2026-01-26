@@ -1,6 +1,6 @@
 ---
 name: sdd-strategic-planner
-description: 拆 tasks + Ownership Matrix + slices。将规格拆解为可执行的任务列表，定义文件归属和切片边界。
+description: 任务拆解与切片规划。触发：任务分解、slice、ownership。输出：tasks.md、slices/*.md。边界：不写代码。
 tools:
   - Read
   - Glob

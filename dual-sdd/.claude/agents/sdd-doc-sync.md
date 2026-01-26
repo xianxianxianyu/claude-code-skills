@@ -1,6 +1,6 @@
 ---
 name: sdd-doc-sync
-description: 更新 .claude/moyu/docs/ + 检查规格一致性。确保文档与实现同步，规格真相库反映最新行为。
+description: 文档同步与一致性检查。触发：文档更新、sync docs、CHANGELOG。输出：docs/*.md。边界：只改文档。
 tools:
   - Read
   - Glob

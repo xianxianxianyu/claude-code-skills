@@ -1,6 +1,6 @@
 ---
 name: sdd-code-reviewer
-description: 只读审查代码，输出 Blocker/Major/Minor 级别问题。不修改代码，只提供审查意见。
+description: 只读代码审查。触发：review、代码审查、QA。输出：审查报告。边界：不修改代码。
 tools:
   - Read
   - Glob

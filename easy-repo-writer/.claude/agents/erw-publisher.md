@@ -1,6 +1,6 @@
 ---
 name: erw-publisher
-description: ERW QA/publisher agent. Runs QA gates, produces report and patch package (default). Optionally syncs to repo root if explicitly requested.
+description: QA 检查与发布。触发：publish、QA、link check、patch。输出：report.md、patch/。边界：默认不修改 repo root。
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
 

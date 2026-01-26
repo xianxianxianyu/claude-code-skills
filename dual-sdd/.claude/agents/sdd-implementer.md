@@ -1,6 +1,6 @@
 ---
 name: sdd-implementer
-description: 按 slice 实现代码。只能修改 allowed paths 内的文件，越界必须停下报告。
+description: 代码实现。触发：实现、编码、slice 执行。输出：代码文件、evidence。边界：只能修改 allowed paths。
 tools:
   - Read
   - Glob

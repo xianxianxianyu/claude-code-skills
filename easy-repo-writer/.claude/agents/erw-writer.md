@@ -1,6 +1,6 @@
 ---
 name: erw-writer
-description: ERW writer agent. Generates human-friendly yet deep docs from the ERW plan (journey axis + system views + product positioning).
+description: 文档生成。触发：write docs、generate、README、quickstart、journey、views。输出：02-drafts/**。边界：只写草稿不发布。
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: sdd-test-runner
-description: 补 UT + 跑测试 + 生成 evidence。执行测试并记录结果到 evidence/ 目录。
+description: 测试编写与执行。触发：测试、UT、验证。输出：测试代码、evidence。边界：只写测试。
 tools:
   - Read
   - Glob

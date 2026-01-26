@@ -44,3 +44,8 @@
 - [ ] AC 明确且可测试
 - [ ] delta specs 覆盖关键行为变化
 - [ ] 风险/回滚明确
+
+## Related Documents
+- Feasibility Analysis: [decisions.md](./decisions.md)
+- Truth Source Specs: <!-- List affected specs -->
+- Delta Specs: [specs/](./specs/)

@@ -1,80 +1,47 @@
-# SDD 双模式团队骨架 - 项目配置
+# SDD 双模式框架
 
-> 本文件是项目级配置，补充全局 CLAUDE.md 中的 SDD 框架定义。
+## Goal
+- 规格驱动开发：先有可测试的验收标准，再写代码
+- 双模式支持：SpecKit（新模块）/ OpenSpec（存量改造）
 
----
+## 入口
+- 启动 WI：`WI-YYYYMMDD-###-slug`
+- 选择模式后按流水线执行
 
-## Skills 加载规则
+## 默认输出位置
+- 所有工件先写入 `.claude/moyu/`
+- 需用户同意才能修改 repo 根目录
 
-### 目录结构
-```
-.claude/
-├── agents/                    # Agent 定义（含 skills 引用）
-│   ├── sdd-architect.md
-│   ├── sdd-feasibility-analyst.md
-│   ├── sdd-strategic-planner.md
-│   ├── sdd-implementer.md
-│   ├── sdd-code-reviewer.md
-│   ├── sdd-test-runner.md
-│   └── sdd-doc-sync.md
-├── skills/                    # Skill 定义
-│   ├── sdd-common/SKILL.md    # 通用技能（路径解析、上下文维护等）
-│   ├── sdd-architect/SKILL.md
-│   ├── sdd-feasibility/SKILL.md
-│   ├── sdd-planner/SKILL.md
-│   ├── sdd-implementer/SKILL.md
-│   ├── sdd-reviewer/SKILL.md
-│   ├── sdd-tester/SKILL.md
-│   ├── sdd-docsync/SKILL.md
-│   └── sdd-plan/SKILL.md
-└── moyu/                      # 工件存储
-    ├── specs/                 # SpecKit 工件
-    ├── openspec/              # OpenSpec 工件
-    │   ├── specs/             # 真相库
-    │   └── changes/           # 变更隔离
-    ├── templates/             # 模板
-    ├── docs/                  # 开发文档
-    ├── trace/                 # 追踪日志
-    └── .specify/              # Specify 框架
-```
+## Subagents 路由索引
 
-### Agent 与 Skill 关联
-每个 Agent 通过 frontmatter 中的 `skills` 字段声明依赖的技能：
+| Agent | 触发场景 |
+|-------|----------|
+| sdd-architect | 需求分析、spec、proposal、需求定义 |
+| sdd-feasibility-analyst | feasibility、方案对比、技术选型、风险评估 |
+| sdd-strategic-planner | 任务分解、slice、ownership、拆解 |
+| sdd-implementer | 实现、编码、slice 执行 |
+| sdd-code-reviewer | review、代码审查、QA |
+| sdd-test-runner | 测试、UT、验证 |
+| sdd-doc-sync | 文档更新、sync docs、CHANGELOG |
 
-```yaml
----
-name: sdd-architect
-skills:
-  - sdd-common      # 通用技能
-  - sdd-architect   # 专属技能
----
-```
+## 关键路径索引
 
-### 关键路径（相对路径）
 | 用途 | 路径 |
 |------|------|
-| 模板读取 | `.claude/moyu/templates/**` |
+| 模板 | `.claude/moyu/templates/**` |
 | SpecKit 工件 | `.claude/moyu/specs/<WI>/` |
 | OpenSpec 变更 | `.claude/moyu/openspec/changes/<WI>/` |
 | OpenSpec 真相库 | `.claude/moyu/openspec/specs/**` |
 | 开发文档 | `.claude/moyu/docs/**` |
 | 追踪日志 | `.claude/moyu/trace/runs.jsonl` |
 
----
-
-## Agent 列表
-
-| Agent | 职责 | 工具权限 |
-|-------|------|----------|
-| sdd-architect | 规格设计（spec/proposal） | Read, Glob, Grep, Write, Edit |
-| sdd-feasibility-analyst | 方案对比/决策 | Read, Glob, Grep, Write, Edit |
-| sdd-strategic-planner | 任务拆解/切片 | Read, Glob, Grep, Write, Edit |
-| sdd-implementer | 代码实现 | Read, Glob, Grep, Write, Edit, Bash |
-| sdd-code-reviewer | 代码审查（只读） | Read, Glob, Grep |
-| sdd-test-runner | 测试执行 | Read, Glob, Grep, Write, Edit, Bash |
-| sdd-doc-sync | 文档同步 | Read, Glob, Grep, Write, Edit |
-
----
+## Rules 索引
+- `.claude/rules/dual-sdd/docs.md`
+- `.claude/rules/dual-sdd/testing.md`
+- `.claude/rules/dual-sdd/style.md`
+- `.claude/rules/dual-sdd/security.md`
+- `.claude/rules/dual-sdd/docs/prd.md`
+- `.claude/rules/dual-sdd/docs/feasibility.md`
 
 ## 快速开始
 
